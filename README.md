@@ -1,16 +1,43 @@
-# How to Push Docker image on DockerHub
+# ☸️ End-to-End Task Manager Deployment on Kubernetes (AWS EC2)
 
-### 1. Build the Docker image
-	docker build -t <your-dockerhub-username>/task-manager:latest .
-### 2. Test the image locally
-	docker run -d -p 8080:80 --name <your-dockerhub-username>/task-manager:latest
+This project demonstrates a complete DevOps lifecycle: from containerizing a Python/Flask application to deploying it on a multi-node **Kubernetes Cluster** using **kubeadm** and **containerd** on **AWS EC2**.
 
-Visit  [http://localhost:8080](http://localhost:8080/)  in your browser to test the application.
+---
 
-### 3. Push to Docker Hub
-#### Log in to Docker Hub (if not already logged in)
-	docker login
-	use your PAT key (from DockerHub)
+## 🏗️ Architecture & Workflow
+The application is deployed on a Kubernetes cluster consisting of a **Master Node** and a **Worker Node**.
 
-#### Push the image to Docker Hub
-	docker push <your-dockerhub-username>/task-manager:latest
+1. **Dockerization:** Application is containerized using a Dockerfile.
+2. **Registry:** Image is pushed to **Docker Hub** for centralized access.
+3. **Infrastructure:** AWS EC2 instances are used for cluster nodes.
+4. **Orchestration:** Kubernetes manages the deployment, scaling, and networking.
+
+
+
+---
+
+## 🛠️ Technologies Used
+- **Cloud:** Amazon Web Services (AWS)
+- **Containerization:** Docker
+- **Orchestration:** Kubernetes (K8s)
+- **Cluster Management:** Kubeadm
+- **Container Runtime:** Containerd
+- **Registry:** Docker Hub
+
+---
+
+## 🚀 Step-by-Step Implementation
+
+### 1. Dockerizing & Pushing the Image
+First, I built and tested the image locally before pushing it to the registry.
+
+```bash
+# Build the image
+docker build -t mazidhossain/task-manager:latest .
+
+# Test locally (Visit http://localhost:8080)
+docker run -d -p 8080:80 --name task-manager-local mazidhossain/task-manager:latest
+
+# Push to Docker Hub
+docker login  # Use your Personal Access Token (PAT)
+docker push mazidhossain/task-manager:latest
